@@ -1,0 +1,11 @@
+one:
+  name: one
+  email: one@ho.ge
+  password: one
+  token: test
+<% 100.times do |n| %>
+hoge<%= n %>:
+  name:  <%= "hoge#{n}" %>
+  email: <%= "hoge#{n}@ho.ge" %>
+  password: <%= "hoge#{n}" %>
+<% end %>

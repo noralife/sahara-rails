@@ -1,0 +1,37 @@
+require 'test_helper'
+
+class ProductsControllerTest < ActionController::TestCase
+  setup do
+    @product = products(:one)
+  end
+
+  test "should list" do
+    get :list
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should get product" do
+    get :get, id: @product.id
+    assert_response :success
+  end
+
+  test "should create product" do
+    assert_difference('Product.count') do
+      post :create, { desc: @product.desc, name: @product.name }
+    end
+    assert_response :success
+  end
+
+  test "should update product" do
+    put :update, { id: @product.id, desc: "new " + @product.desc, name: @product.name }
+    assert_response :success
+  end
+
+  test "should destroy product" do
+    assert_difference('Product.count', -1) do
+      delete :destroy, id: @product.id
+    end
+    assert_response :success
+  end
+end

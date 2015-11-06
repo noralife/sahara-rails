@@ -1,0 +1,9 @@
+one:
+  name: MyString
+  desc: MyString
+
+<% 100.times do |n| %>
+hoge<%= n %>:
+  name: <%= "hoge#{n}" %>
+  desc: <%= "hoge#{n} desc" %>
+<% end %>

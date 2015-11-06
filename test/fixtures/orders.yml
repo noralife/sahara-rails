@@ -1,0 +1,11 @@
+one:
+  customer: one
+  product: one
+  status: finished
+
+<% 100.times do |n| %>
+hoge<%= n %>:
+  customer_id: n
+  product_id: n
+  status: finished
+<% end %>
