@@ -19,5 +19,6 @@ rails:
   environment:
     RAILS_ENV: production
     MYSQL_ROOT_PASSWORD: 'root'
+    SECRET_KEY_BASE: '68f311267c624899ceaf8b03d2fd7695f43ae39d99ed294060f6083b69b6d7fda557912252f89e493d74b21a6fa7fd8c4b882fb85216bf2f05a0effdbacac534'
   links:
     - mysql
