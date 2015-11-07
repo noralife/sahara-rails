@@ -27,4 +27,4 @@ production:
   pool: 5
   username: root
   password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>
-  host: db
+  host: mysql

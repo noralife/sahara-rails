@@ -1,0 +1,23 @@
+mysql:
+  image: mysql:5.6.23
+  environment:
+    MYSQL_ROOT_PASSWORD: 'root'
+  ports:
+    - '3306:3306'
+
+nginx:
+  build: dockerfiles/nginx
+  ports:
+    - '8080:80'
+  links:
+    - rails
+
+rails:
+  build: .
+  ports:
+    - '3000:3000'
+  environment:
+    RAILS_ENV: production
+    MYSQL_ROOT_PASSWORD: 'root'
+  links:
+    - mysql
