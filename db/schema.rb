@@ -14,27 +14,27 @@
 ActiveRecord::Schema.define(version: 20151025114837) do
 
   create_table "customers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "password",   limit: 255
+    t.string   "token",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.integer  "product_id"
-    t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "customer_id", limit: 4
+    t.integer  "product_id",  limit: 4
+    t.string   "status",      limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.string   "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.text     "desc",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end
