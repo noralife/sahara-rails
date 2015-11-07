@@ -9,7 +9,8 @@ class CustomerTest < ActiveSupport::TestCase
     customer = Customer.new(
       name: "test",
       email: "test@ho.hoge",
-      password: "test"
+      password: "test",
+      role: "user"
     )
     assert customer.save
   end
@@ -17,13 +18,15 @@ class CustomerTest < ActiveSupport::TestCase
     customer1 = Customer.new(
       name: "test",
       email: "test@ho.hoge",
-      password: "test"
+      password: "test",
+      role: "user"
     )
     customer1.save
     customer2 = Customer.new(
       name: "test",
       email: "test@ho.hoge",
-      password: "test"
+      password: "test",
+      role: "user"
     )
     assert_not customer2.save
   end

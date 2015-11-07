@@ -5,6 +5,7 @@ class CreateCustomers < ActiveRecord::Migration
       t.string :email
       t.string :password
       t.string :token
+      t.string :role
 
       t.timestamps null: false
     end

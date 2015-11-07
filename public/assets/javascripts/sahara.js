@@ -41,19 +41,17 @@ $(function(){
     var email    = $('#email').val();
     var password = $('#password').val();
     SaharaAPI.login({"email": email, "password": password}, function(data){
-      if (data['status'] == "success") {
-        // Save token in cookie
-        SaharaCookie.set('saharasession', data['token']);
-	// Change menu bar
-        $('#login-link').css("display", "none");
-        $('#logout-link').removeAttr("style");
-        $('#order-link').removeAttr("style");
-	// Close modal window 
-        $('#login-modal-flash').empty();
-        $('#login-modal').modal('hide');
-      } else {
-        $('#login-modal-flash').html(SaharaUI.flash_message('danger', 'Invalid email or password'));
-      }
+      // Save token in cookie
+      SaharaCookie.set('saharasession', data['token']);
+      // Change menu bar
+      $('#login-link').css("display", "none");
+      $('#logout-link').removeAttr("style");
+      $('#order-link').removeAttr("style");
+      // Close modal window 
+      $('#login-modal-flash').empty();
+      $('#login-modal').modal('hide');
+    }, function(data){
+      $('#login-modal-flash').html(SaharaUI.flash_message('danger', 'Invalid email or password'));
     });
   });
 

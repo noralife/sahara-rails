@@ -5,7 +5,7 @@ SaharaAPI.handle_standard_error = function(data){
   alert('connection error');
 };
 
-SaharaAPI.login = function(credential, callback){
+SaharaAPI.login = function(credential, callback, error_callback){
   $.ajax({
     type: "POST",
     url: "/api/v1/login",
@@ -14,7 +14,7 @@ SaharaAPI.login = function(credential, callback){
   }).done(function(data){
     callback(data);
   }).fail(function(data){
-    handle_standard_error(data);
+    error_callback(data)
   });
 };
 
@@ -26,7 +26,7 @@ SaharaAPI.logout = function(token, callback){
   }).done(function(data){
     callback(data);
   }).fail(function(data){
-    handle_standard_error(data);
+    SaharaAPI.handle_standard_error(data);
   });
 };
 
@@ -37,7 +37,7 @@ SaharaAPI.list_products = function(callback){
   }).done(function(data){
     callback(data);
   }).fail(function(data){
-    handle_standard_error(data);
+    SaharaAPI.handle_standard_error(data);
   });
 };
 
@@ -49,7 +49,7 @@ SaharaAPI.list_orders = function(token, callback){
   }).done(function(data){
     callback(data);
   }).fail(function(data){
-    handle_standard_error(data);
+    SaharaAPI.handle_standard_error(data);
   });
 };
 
@@ -63,6 +63,6 @@ SaharaAPI.create_order = function(token, product_id, callback){
   }).done(function(data){
     callback(data);
   }).fail(function(data){
-    handle_standard_error(data);
+    SaharaAPI.handle_standard_error(data);
   });
 };

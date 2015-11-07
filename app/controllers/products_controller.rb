@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:get, :update, :destroy]
+  before_action :authenticate, only: [:create, :update, :destroy]
+  before_action :admin_only,   only: [:create, :update, :destroy]
+  before_action :set_product,  only: [:get, :update, :destroy]
 
   # GET /products
   def list
@@ -16,25 +18,49 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      render json: @product
+      render json: {
+        status: "success",
+        message: "Product successfully created",
+        product: @product
+      }
     else
-      render json: @product.errors
+      render(
+        json: {status: "error", message: print_message(@product.errors)},
+        status: 500
+      )
     end
   end
 
-  # PATCH/PUT /products/1
+  # PUT /products/1
   def update
     if @product.update(product_params)
-      render json: @product 
+      render json: {
+        status: "success",
+        message: "Product successfully updated",
+        product: @product
+      }
     else
-      render json: @product.errors
+      render(
+        json: {status: "error", message: print_message(@product.errors)},
+        status: 500
+      )
     end
   end
 
   # DELETE /products/1
   def destroy
-    @product.destroy
-    render json: {"message" => "success"}
+    if @product.destroy
+      render json: {
+        status: "success",
+        message: "Product successfully deleted",
+        product: @product
+      }
+    else
+      render(
+        json: {status: "error", message: print_message(@product.errors)},
+        status: 500
+      )
+    end
   end
 
   private

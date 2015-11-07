@@ -1,6 +1,11 @@
 one:
-  customer: one
+  customer: user
   product: one
+  status: finished
+
+two:
+  customer: user
+  product: two
   status: finished
 
 <% 100.times do |n| %>

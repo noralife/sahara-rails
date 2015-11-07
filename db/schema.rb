@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20151025114837) do
     t.string   "name",       limit: 255
     t.string   "email",      limit: 255
     t.string   "password",   limit: 255
+    t.string   "role",       limit: 255
     t.string   "token",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

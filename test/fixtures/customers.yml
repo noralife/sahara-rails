@@ -1,11 +1,21 @@
-one:
-  name: one
-  email: one@ho.ge
-  password: one
-  token: test
+admin:
+  name: admin
+  email: admin@ho.ge
+  password: admin
+  role: admin
+  token: admintest
+
+user:
+  name: user
+  email: user@ho.ge
+  password: user
+  role: user
+  token: testuser
+
 <% 100.times do |n| %>
 hoge<%= n %>:
   name:  <%= "hoge#{n}" %>
   email: <%= "hoge#{n}@ho.ge" %>
   password: <%= "hoge#{n}" %>
+  role: user
 <% end %>

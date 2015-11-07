@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_customer
+  before_action :authenticate, only: [:list, :get, :create, :update, :destroy]
   before_action :set_order, only: [:get, :update, :destroy]
 
   # GET /orders
@@ -16,32 +16,59 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     customer_id = @customer.id
-    product_id  = order_params[:product_id]
-    if customer_id.nil? || product_id.nil?
-      render json: {"status": "error", "message": "product id and customer id are required"}
+    product     = Product.find(order_params[:product_id])
+    if product.id.nil?
+      render json: {
+        "status": "error",
+	"message": "product id is wrong or missing"
+      }, status: 400
     else
-      @order = Order.new(customer_id: customer_id, product_id: product_id)
+      @order = Order.new(customer_id: customer_id, product_id: product.id)
       if @order.save
-        render json: {status: "success", message: "success", order_id: @order.id}
+        render json: {
+          status: "success",
+          message: "Order successfully created",
+          order: @order
+        }
       else
-        render json: {status: "error", message: "saving order was failed"}
+        render(
+          json: {status: "error", message: print_message(@order.errors)},
+          status: 500
+        )
       end
     end
   end
 
-  # PATCH/PUT /orders/1
+  # PUT /orders/1
   def update
     if @order.update(order_params)
-      render json: {status: "success", message: "success", order_id: @order.id}
+      render json: {
+        status: "success",
+        message: "Order successfully updated",
+        order: @order
+      }
     else
-      render json: {status: "error", message: "updating order was failed", order_id: @order.id}
+      render(
+        json: {status: "error", message: print_message(@order.errors)},
+        status: 500
+      )
     end
   end
 
   # DELETE /orders/1
   def destroy
-    @order.destroy
-    render json: {"status": "status", "message" => "success"}
+    if @order.destroy
+      render json: {
+        status: "success",
+        message: "Order successfully deleted",
+        order: @order
+      }
+    else
+      render(
+        json: {status: "error", message: print_message(@order.errors)},
+        status: 500
+      )
+    end
   end
 
   private
@@ -53,8 +80,4 @@ class OrdersController < ApplicationController
       params.permit(:customer_id, :product_id, :status)
     end
 
-    def set_customer
-      token = request.env["HTTP_SAHARA_TOKEN"]
-      @customer = Customer.find_by(token: token)
-    end
 end
