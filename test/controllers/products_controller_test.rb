@@ -19,20 +19,20 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should create product" do
     assert_difference('Product.count') do
-      request.headers["HTTP-SAHARA-TOKEN"] = @admin.token
+      request.headers["HTTP_SAHARA_TOKEN"] = @admin.token
       post :create, { desc: @product.desc, name: @product.name }
     end
     assert_response :success
   end
 
   test "should update product" do
-    request.headers["HTTP-SAHARA-TOKEN"] = @admin.token
+    request.headers["HTTP_SAHARA_TOKEN"] = @admin.token
     put :update, { id: @product.id, desc: "new " + @product.desc, name: @product.name }
     assert_response :success
   end
 
   test "should destroy product" do
-    request.headers["HTTP-SAHARA-TOKEN"] = @admin.token
+    request.headers["HTTP_SAHARA_TOKEN"] = @admin.token
     assert_difference('Product.count', -1) do
       delete :destroy, id: @product.id
     end
