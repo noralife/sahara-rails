@@ -21,7 +21,7 @@ SaharaAPI.login = function(credential, callback, error_callback){
 SaharaAPI.logout = function(token, callback){
   $.ajax({
     type: "GET",
-    headers: {"SAHARA_TOKEN": token},
+    headers: {"SAHARA-TOKEN": token},
     url: "/api/v1/logout",
   }).done(function(data){
     callback(data);
@@ -45,7 +45,7 @@ SaharaAPI.list_orders = function(token, callback){
   $.ajax({
     url: "/api/v1/orders",
     dataType: 'json',
-    headers: {"SAHARA_TOKEN": token},
+    headers: {"SAHARA-TOKEN": token},
   }).done(function(data){
     callback(data);
   }).fail(function(data){
@@ -56,7 +56,7 @@ SaharaAPI.list_orders = function(token, callback){
 SaharaAPI.create_order = function(token, product_id, callback){
   $.ajax({
     type: "POST",
-    headers: {"SAHARA_TOKEN": token},
+    headers: {"SAHARA-TOKEN": token},
     url: "/api/v1/orders",
     data: {"product_id": product_id},
     dataType: 'json'
