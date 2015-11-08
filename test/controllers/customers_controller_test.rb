@@ -7,21 +7,21 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should list" do
-    request.headers["HTTP_SAHARA_TOKEN"] = @admin.token
+    request.headers["HTTP-SAHARA-TOKEN"] = @admin.token
     get :list, nil
     assert_response :success
     assert_not_nil assigns(:customers)
   end
 
   test "should get customer" do
-    request.headers["HTTP_SAHARA_TOKEN"] = @user.token
+    request.headers["HTTP-SAHARA-TOKEN"] = @user.token
     get :get, {id: @user.id}
     assert_response :success
   end
 
   test "should create customer" do
     assert_difference('Customer.count') do
-    request.headers["HTTP_SAHARA_TOKEN"] = @admin.token
+    request.headers["HTTP-SAHARA-TOKEN"] = @admin.token
       post(
         :create,
         { email: @user.email+'.test', name: @user.name, password: @user.password, role: "user"}
@@ -31,7 +31,7 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should update customer" do
-    request.headers["HTTP_SAHARA_TOKEN"] = @user.token
+    request.headers["HTTP-SAHARA-TOKEN"] = @user.token
     put(
       :update,
       {id: @user.id, email: @user.email+'.test2' }
@@ -40,7 +40,7 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should destroy customer" do
-    request.headers["HTTP_SAHARA_TOKEN"] = @user.token
+    request.headers["HTTP-SAHARA-TOKEN"] = @user.token
     assert_difference('Customer.count', -1) do
       delete :destroy, {id: @user.id}
     end

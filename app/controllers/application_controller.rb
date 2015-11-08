@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    token = request.env["HTTP_SAHARA_TOKEN"]
+    token = request.env["SAHARA-TOKEN"]
     if token.nil? || token == ""
       render(
         json: {status: "error", message: "Authentication is required"},
